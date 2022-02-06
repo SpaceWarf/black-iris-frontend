@@ -1,0 +1,14 @@
+.animated-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+
+  svg {
+    transition-duration: 0.5s;
+    transition-property: transform;
+
+    &.toggled {
+      transform: rotate(-90deg);
+    }
+  }
+}

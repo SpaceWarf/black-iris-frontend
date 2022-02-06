@@ -6,20 +6,48 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Home',
     component: Home,
+    meta: {
+      title: 'Home - The Burrow',
+      metaTags: [
+        {
+          name: 'description',
+          content: 'The home page of the website',
+        },
+        {
+          property: 'og:description',
+          content: 'The home page of the website',
+        },
+      ],
+    },
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    path: '/store',
+    name: 'Store',
+    component: () => import(/* webpackChunkName: "store" */ '../views/Store.vue'),
+    meta: {
+      title: 'Store - The Burrow',
+      metaTags: [
+        {
+          name: 'description',
+          content: 'The store page of the website.',
+        },
+        {
+          property: 'og:description',
+          content: 'The store page of the website.',
+        },
+      ],
+    },
   },
 ];
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  document.title = (to.meta.title as string) || 'The Burrow';
+  next();
 });
 
 export default router;

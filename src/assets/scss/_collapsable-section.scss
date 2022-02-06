@@ -1,0 +1,15 @@
+.collapsable-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.collapsable-content {
+  max-height: 400px;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+
+  &.collapsed {
+    max-height: 0;
+  }
+}

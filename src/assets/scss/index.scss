@@ -1,0 +1,45 @@
+@import "./colours";
+@import "./dimensions";
+@import "./text";
+@import "./cards";
+@import "./collapsable-section";
+@import "./animated-icon";
+
+body {
+  margin: 0;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $black;
+}
+
+.content {
+  margin: $content-margin;
+  margin-top: calc($header-height + (2 * $header-padding) + ($content-margin / 2));
+}
+
+#nav {
+  display: flex;
+  gap: 10px;
+  margin-left: 20px;
+
+  a {
+    color: $white;
+  }
+
+  .router-link-active {
+    color: $primary;
+  }
+}
+
+a {
+  font-weight: bold;
+  color: $primary;
+}
+
+p, h1, h2 {
+  margin: 0;
+}
