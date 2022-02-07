@@ -1,0 +1,36 @@
+#header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: $header-height;
+  width: 100%;
+  padding: $header-padding;
+  background-color: $black;
+
+  img {
+    width: calc($header-height - (2 * $header-padding));
+  }
+
+  .header-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $white;
+  }
+  
+  #nav {
+    display: flex;
+    gap: 30px;
+    margin-left: 50px;
+  
+    a {
+      color: $white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  
+    .router-link-active {
+      color: $primary;
+    }
+  }
+}

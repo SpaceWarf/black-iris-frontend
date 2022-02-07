@@ -8,7 +8,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import App from './App.vue';
 import router from './router';
-import store from './store';
+import store, { key } from './store';
 
 library.add(
   faClock,
@@ -17,7 +17,7 @@ library.add(
 );
 
 createApp(App)
-  .use(store)
+  .use(store, key)
   .use(router)
   .component('font-awesome-icon', FontAwesomeIcon)
   .mount('#app');

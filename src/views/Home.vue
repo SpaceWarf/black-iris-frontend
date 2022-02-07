@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <h1>Placeholder</h1>
   </div>
 </template>
 

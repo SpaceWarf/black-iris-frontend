@@ -1,15 +1,20 @@
 @import "./colours";
 @import "./dimensions";
-@import "./text";
 @import "./cards";
 @import "./collapsable-section";
 @import "./animated-icon";
+@import "./sidebar";
+@import "./header";
 
-body {
-  margin: 0;
+* {
+  box-sizing: border-box;
 }
 
+html,
+body,
 #app {
+  height: 100%;
+  margin: 0;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -17,22 +22,7 @@ body {
 }
 
 .content {
-  margin: $content-margin;
-  margin-top: calc($header-height + (2 * $header-padding) + ($content-margin / 2));
-}
-
-#nav {
-  display: flex;
-  gap: 10px;
-  margin-left: 20px;
-
-  a {
-    color: $white;
-  }
-
-  .router-link-active {
-    color: $primary;
-  }
+  height: calc(100% - $header-height);
 }
 
 a {

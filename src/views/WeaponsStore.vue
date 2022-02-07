@@ -1,17 +1,17 @@
 <template>
   <div class="content">
-    <StoreListing></StoreListing>
+    <Listings></Listings>
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import StoreListing from '@/components/listings/Listings.vue';
+import Listings from '@/components/listings/Listings.vue';
 
 @Options({
   components: {
-    StoreListing,
+    Listings,
   },
 })
-export default class Store extends Vue {}
+export default class WeaponsStore extends Vue {}
 </script>

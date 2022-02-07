@@ -1,45 +1,54 @@
 <template>
-  <div class="card" v-on:click="onClick()">
+  <div class="card" v-on:click="setActiveListing(listing)">
     <div class="image">
       <img :src="getImgUrl()" alt="Item Image">
     </div>
     <div class="body">
-      <div class="title-row">
-        <p class="item-name">Combat Pistol</p>
-        <p class="end-date">2022-01-08 <font-awesome-icon icon="clock"/></p>
-      </div>
+      <p class="item-name">{{ getItemNameFromId(listing.itemId) }}</p>
       <div class="details-row">
-        <p class="quantity">5</p>
+        <p class="quantity">{{ listing.quantity }}</p>
         <p class="separator">items at</p>
-        <p class="price">5,000$</p>
+        <p class="price">{{ formatAsCurrency(getHighestBid()) }}</p>
+        <p class="separator">per</p>
       </div>
+      <p class="end-date"><font-awesome-icon icon="clock"/> {{ listing.endDate }}</p>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import { ListingDetails } from './Listings.vue';
+import ListingDetails from '@/models/ListingDetails';
+import { useStore } from '@/store';
+import { mapMutations } from 'vuex';
+import { formatAsCurrency } from '@/utils/currency';
+import { getItemNameFromId } from '@/utils/item-ids';
 
 @Options({
   props: {
     listing: {} as ListingDetails,
   },
+  store: useStore(),
+  methods: {
+    ...mapMutations(["setActiveListing"]),
+    formatAsCurrency,
+    getItemNameFromId
+  },
 })
 export default class ListingCard extends Vue {
   listing!: ListingDetails;
 
-  getImgUrl(): string {
-    const images = require.context('@/assets/guns', false, /\.png$/);
-    return images(`./${this.listing.asset}`);
+  getHighestBid(): number {
+    return this.listing.bids.length
+      ? Math.max(
+        ...this.listing.bids.map(bid => bid.price)
+      )
+      : this.listing.basePrice;
   }
 
-  onClick(): void {
-    console.log("click: ", this.listing);
+  getImgUrl(): string {
+    const images = require.context('@/assets/guns', false, /\.png$/);
+    return images(`./${this.listing.itemId}.png`);
   }
 }
 </script>
-
-<style scoped lang="scss">
-
-</style>

@@ -21,19 +21,37 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: '/store',
-    name: 'Store',
-    component: () => import(/* webpackChunkName: "store" */ '../views/Store.vue'),
+    path: '/weapons',
+    name: 'Weapons Store',
+    component: () => import(/* webpackChunkName: "store" */ '../views/WeaponsStore.vue'),
     meta: {
-      title: 'Store - The Burrow',
+      title: 'Weapons Store - The Burrow',
       metaTags: [
         {
           name: 'description',
-          content: 'The store page of the website.',
+          content: 'The weapons store page of the website.',
         },
         {
           property: 'og:description',
-          content: 'The store page of the website.',
+          content: 'The weapons store page of the website.',
+        },
+      ],
+    },
+  },
+  {
+    path: '/drugs',
+    name: 'Drugs Store',
+    component: () => import(/* webpackChunkName: "store" */ '../views/DrugsStore.vue'),
+    meta: {
+      title: 'Drugs Store - The Burrow',
+      metaTags: [
+        {
+          name: 'description',
+          content: 'The drugs store page of the website.',
+        },
+        {
+          property: 'og:description',
+          content: 'The drugs store page of the website.',
         },
       ],
     },
