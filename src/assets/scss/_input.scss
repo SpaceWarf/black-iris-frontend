@@ -1,0 +1,42 @@
+.input-container {
+  position: relative;
+
+  input {
+    height: 40px;
+    width: 100%;
+    border: 1px solid $gray;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1.2rem;
+    outline: none;
+
+    &.with-icon {
+      padding-right: 30px;
+    }
+
+    &::placeholder {
+      font-size: 1rem;
+      font-weight: normal;
+    }
+  }
+
+  p {
+    position: absolute;
+    right: 10px;
+    top: 9px;
+    color: $black;
+    font-weight: bold;
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+
+    &.show-password {
+      color: $gray;
+      font-size: 1rem;
+      cursor: pointer;
+    
+      &:hover {
+        color: $gray-dark;
+      }
+    }
+  }
+}

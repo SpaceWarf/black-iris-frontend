@@ -1,0 +1,9 @@
+.hyperlink {
+  color: $primary;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

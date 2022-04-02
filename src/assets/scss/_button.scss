@@ -1,0 +1,36 @@
+.button-container {
+  button {
+    height: 40px;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  &:not(.secondary) {
+    button {
+      background-color: $primary;
+      color: $white;
+
+      &:hover {
+        background-color: $primary-dark;
+      }
+    }
+  }
+
+  &.secondary {
+    button {
+      background-color: $white;
+      color: $primary;
+      border: 1px solid $primary;
+
+      &:hover {
+        background-color: $primary-light;
+        border: 2px solid $primary;
+      }
+    }
+  }
+}

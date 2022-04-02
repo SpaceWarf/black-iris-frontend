@@ -1,59 +1,35 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
-import Home from '../views/Home.vue';
+import { getUser } from '@/utils/firebase';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    redirect: '/weapons'
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import(/* webpackChunkName: "login" */ '../views/LoginView.vue'),
     meta: {
-      title: 'Home - The Burrow',
-      metaTags: [
-        {
-          name: 'description',
-          content: 'The home page of the website',
-        },
-        {
-          property: 'og:description',
-          content: 'The home page of the website',
-        },
-      ],
+      title: 'Login - The Burrow',
     },
   },
   {
     path: '/weapons',
     name: 'Weapons Store',
-    component: () => import(/* webpackChunkName: "store" */ '../views/WeaponsStore.vue'),
+    component: () => import(/* webpackChunkName: "weaponStore" */ '../views/WeaponsStoreView.vue'),
     meta: {
       title: 'Weapons Store - The Burrow',
-      metaTags: [
-        {
-          name: 'description',
-          content: 'The weapons store page of the website.',
-        },
-        {
-          property: 'og:description',
-          content: 'The weapons store page of the website.',
-        },
-      ],
+      authRequired: true,
     },
   },
   {
     path: '/drugs',
     name: 'Drugs Store',
-    component: () => import(/* webpackChunkName: "store" */ '../views/DrugsStore.vue'),
+    component: () => import(/* webpackChunkName: "drugStore" */ '../views/DrugsStoreView.vue'),
     meta: {
       title: 'Drugs Store - The Burrow',
-      metaTags: [
-        {
-          name: 'description',
-          content: 'The drugs store page of the website.',
-        },
-        {
-          property: 'og:description',
-          content: 'The drugs store page of the website.',
-        },
-      ],
+      authRequired: true,
     },
   },
 ];
@@ -63,9 +39,17 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   document.title = (to.meta.title as string) || 'The Burrow';
-  next();
+  if (to.matched.some(record => record.meta.authRequired)) {
+    if (await getUser()) {
+      next();
+    } else {
+      next({ path: '/login' });
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;
