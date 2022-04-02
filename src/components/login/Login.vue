@@ -22,6 +22,7 @@ import CardWithContent from "./CardWithContent.vue";
 import Button from "../common/Button.vue";
 import Input from "../common/Input.vue";
 import { logIn } from "@/utils/firebase";
+import router from "@/router";
 
 @Options({
   components: { CardWithContent, Button, Input },
@@ -39,7 +40,7 @@ export default class Login extends Vue {
   }
 
   handleForgotPassword(): void {
-    console.log("forgot password");
+    router.push('/forgotPassword');
   }
 }
 </script>

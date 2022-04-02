@@ -1,19 +1,14 @@
 <template>
   <div class="content">
-    <Login></Login>
+    404 Not Found
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import Login from "@/components/login/Login.vue";
 
-@Options({
-  components: {
-    Login,
-  },
-})
-export default class LoginView extends Vue {}
+@Options({})
+export default class NotFoundView extends Vue {}
 </script>
 
 <style scoped lang="scss">

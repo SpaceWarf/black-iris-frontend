@@ -1,19 +1,19 @@
 <template>
   <div class="content">
-    <Login></Login>
+    <ForgotPassword></ForgotPassword>
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import Login from "@/components/login/Login.vue";
+import ForgotPassword from "@/components/login/ForgotPassword.vue";
 
 @Options({
   components: {
-    Login,
+    ForgotPassword,
   },
 })
-export default class LoginView extends Vue {}
+export default class ForgotPasswordView extends Vue {}
 </script>
 
 <style scoped lang="scss">

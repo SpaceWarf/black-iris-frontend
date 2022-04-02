@@ -35,3 +35,7 @@ export const logOut = (): void => {
       alert(error.message);
     });
 }
+
+export const resetPassword = (email: string): void => {
+  console.log("reset password: ", email);
+}

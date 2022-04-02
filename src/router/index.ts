@@ -11,7 +11,15 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Login',
     component: () => import(/* webpackChunkName: "login" */ '../views/LoginView.vue'),
     meta: {
-      title: 'Login - The Burrow',
+      title: 'Login',
+    },
+  },
+  {
+    path: '/forgotPassword',
+    name: 'Forgot Password',
+    component: () => import(/* webpackChunkName: "forgotPassword" */ '../views/ForgotPasswordView.vue'),
+    meta: {
+      title: 'Forgot Password',
     },
   },
   {
@@ -19,7 +27,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Weapons Store',
     component: () => import(/* webpackChunkName: "weaponStore" */ '../views/WeaponsStoreView.vue'),
     meta: {
-      title: 'Weapons Store - The Burrow',
+      title: 'Weapons Store',
       authRequired: true,
     },
   },
@@ -28,10 +36,14 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Drugs Store',
     component: () => import(/* webpackChunkName: "drugStore" */ '../views/DrugsStoreView.vue'),
     meta: {
-      title: 'Drugs Store - The Burrow',
+      title: 'Drugs Store',
       authRequired: true,
     },
   },
+  {
+    path: "/:catchAll(.*)",
+    component: () => import(/* webpackChunkName: "notFound" */ '../views/NotFoundView.vue'),
+  }
 ];
 
 const router = createRouter({
@@ -40,7 +52,7 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  document.title = (to.meta.title as string) || 'The Burrow';
+  document.title = (to.meta.title as string) || 'Not Found';
   if (to.matched.some(record => record.meta.authRequired)) {
     if (await getUser()) {
       next();

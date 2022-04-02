@@ -13,6 +13,8 @@ import App from './App.vue';
 import router from './router';
 import store, { key } from './store';
 import firebase from "firebase";
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap"
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
