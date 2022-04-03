@@ -1,5 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
-import { getUser } from '@/utils/firebase';
+import { fetchUserDetails, getUser } from '@/utils/firebase';
+import { getRoleAuthorityLevel, Role } from '@/models/enums/Roles';
+import store from '@/store';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -29,6 +31,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: 'Weapons Store',
       authRequired: true,
+      authLevel: Role.User
     },
   },
   {
@@ -38,7 +41,22 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: 'Drugs Store',
       authRequired: true,
+      authLevel: Role.User
     },
+  },
+  {
+    path: '/userManagement',
+    name: 'User Management',
+    component: () => import(/* webpackChunkName: "userManagement" */ '../views/UserManagementView.vue'),
+    meta: {
+      title: 'User Management',
+      authRequired: true,
+      authLevel: Role.SuperAdmin
+    },
+  },
+  {
+    path: "/NotAuthorized",
+    component: () => import(/* webpackChunkName: "NotAuthorized" */ '../views/NotAuthorizedView.vue'),
   },
   {
     path: "/:catchAll(.*)",
@@ -54,8 +72,15 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   document.title = (to.meta.title as string) || 'Not Found';
   if (to.matched.some(record => record.meta.authRequired)) {
-    if (await getUser()) {
-      next();
+    const user = await getUser();
+    if (user && user.email) {
+      await fetchUserDetails(user.email);
+
+      if (getRoleAuthorityLevel(store.getters.getRole) <= getRoleAuthorityLevel(to.meta.authLevel as Role)) {
+        next();
+      } else {
+        next({ path: '/NotAuthorized' });
+      }
     } else {
       next({ path: '/login' });
     }

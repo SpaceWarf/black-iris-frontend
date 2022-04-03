@@ -1,4 +1,5 @@
-import UserDetails from "@/models/UserDetails";
+import { getRoleAuthorityLevel, Role } from "@/models/enums/Roles";
+import UserDetails from "@/models/interfaces/UserDetails";
 
 export interface UserState {
   authenticated: boolean;
@@ -18,6 +19,10 @@ export default {
     logOutUser: (state: UserState): void => {
       state.user = {} as UserDetails;
       state.authenticated = false;
+    },
+    setUserDetails: (state: UserState, details: {group: string, role: Role}): void => {
+      state.user.group = details.group;
+      state.user.role = details.role;
     }
   },
   getters: {
@@ -25,7 +30,19 @@ export default {
       return state.authenticated;
     },
     getEmail: (state: UserState): string => {
-      return state.user.firebaseDetails.email ?? '';
+      return state.user?.firebaseDetails?.email ?? '';
+    },
+    getRole: (state: UserState): string => {
+      return state.user?.role ?? '';
+    },
+    isAdmin: (state: UserState): boolean => {
+      return getRoleAuthorityLevel(state.user.role) <= getRoleAuthorityLevel(Role.Admin);
+    },
+    isSuperAdmin: (state: UserState): boolean => {
+      return getRoleAuthorityLevel(state.user.role) <= getRoleAuthorityLevel(Role.SuperAdmin);
+    },
+    areDetailsSet: (state: UserState): boolean => {
+      return !!state.user.role && !!state.user.group;
     }
   }
 };

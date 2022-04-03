@@ -8,7 +8,7 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import Listings from '@/components/listings/Listings.vue';
-import PageHeader from '@/components/PageHeader.vue';
+import PageHeader from '@/components/header/PageHeader.vue';
 
 @Options({
   components: {

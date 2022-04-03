@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import ListingDetails from '@/models/ListingDetails';
+import ListingDetails from '@/models/interfaces/ListingDetails';
 import { useStore } from '@/store';
 import { mapMutations } from 'vuex';
 import { formatAsCurrency } from '@/utils/currency';

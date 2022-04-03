@@ -28,7 +28,7 @@
 import { Options, Vue } from "vue-class-component";
 import ListingCard from "./ListingCard.vue";
 import CollapsableSection from "../common/CollapsableSection.vue";
-import ListingDetails from "@/models/ListingDetails";
+import ListingDetails from "@/models/interfaces/ListingDetails";
 import Sidebar from "./Sidebar.vue";
 
 export enum Categories {

@@ -1,4 +1,4 @@
-import ListingDetails from "@/models/ListingDetails";
+import ListingDetails from "@/models/interfaces/ListingDetails";
 
 export interface ListingsState {
   activeListing: ListingDetails;

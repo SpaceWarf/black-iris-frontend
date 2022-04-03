@@ -2,8 +2,32 @@
   <div id="header">
     <div></div>
     <div id="nav">
-      <router-link to="weapons">Weapons</router-link>
-      <router-link to="drugs">Drugs</router-link>
+      <div>
+        <router-link
+          v-for="header in getHeadersByRole(Role.User)"
+          :key="header.title"
+          :to="header.link"
+          >{{ header.title }}</router-link
+        >
+      </div>
+      <!-- <div v-if="isAdmin">
+        <div class="header-separator"></div>
+        <router-link
+          v-for="header in getHeadersByRole(Role.Admin)"
+          :key="header.title"
+          :to="header.link"
+          >{{ header.title }}</router-link
+        >
+      </div> -->
+      <div v-if="isSuperAdmin">
+        <div class="header-separator"></div>
+        <router-link
+          v-for="header in getHeadersByRole(Role.SuperAdmin)"
+          :key="header.title"
+          :to="header.link"
+          >{{ header.title }}</router-link
+        >
+      </div>
     </div>
     <div class="dropdown">
       <button
@@ -29,9 +53,22 @@
 import { Options, Vue } from "vue-class-component";
 import { logOut } from "@/utils/firebase";
 import router from "@/router";
+import { mapGetters } from "vuex";
+import headers, { getHeadersByRole } from "./headers.config";
+import { Role } from "@/models/enums/Roles";
 
-@Options({})
+@Options({
+  computed: {
+    ...mapGetters(["isAdmin", "isSuperAdmin"]),
+  },
+  methods: {
+    getHeadersByRole,
+  }
+})
 export default class PageHeader extends Vue {
+  Role = Role;
+  headers = headers;
+
   handleMyAccount(): void {
     router.push("/myAccount");
   }
@@ -43,7 +80,7 @@ export default class PageHeader extends Vue {
 </script>
 
 <style scoped lang="scss">
-@import "../assets/scss/index";
+@import "../../assets/scss/index";
 .dropdown {
   button {
     background-color: transparent;
