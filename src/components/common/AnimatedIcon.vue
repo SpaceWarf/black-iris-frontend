@@ -4,7 +4,7 @@
     v-on:click="toggled = !toggled"
   >
     <font-awesome-icon
-      :class="{ toggled: toggled }"
+      :class="{ toggled }"
       :icon="icon"
     />
   </div>

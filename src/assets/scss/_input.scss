@@ -2,12 +2,10 @@
   position: relative;
 
   input {
-    height: 40px;
     width: 100%;
     border: 1px solid $gray;
     border-radius: 5px;
     padding: 10px;
-    font-size: 1.2rem;
     outline: none;
 
     &.with-icon {
@@ -18,9 +16,28 @@
       font-size: 1rem;
       font-weight: normal;
     }
+
+    &.lg {
+      height: 40px;
+      font-size: 1.2rem;
+    }
+
+    &.sm {
+      height: 30px;
+      font-size: 1rem;
+    }
+
+    &.disabled {
+      background-color: $gray-light;
+      cursor: not-allowed;
+    }
   }
 
-  p {
+  .title {
+    margin: 0;
+  }
+
+  .icon {
     position: absolute;
     right: 10px;
     top: 9px;

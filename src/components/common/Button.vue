@@ -1,5 +1,5 @@
 <template>
-  <div class="button-container" :class="{ secondary: secondary }">
+  <div class="button-container" :class="{ secondary, disabled }">
     <button v-on:click="$emit('onClick')">{{ text }}</button>
   </div>
 </template>
@@ -11,6 +11,7 @@ import { Options, Vue } from "vue-class-component";
   props: {
     text: String,
     secondary: false,
+    disabled: false,
   },
 })
 export default class Button extends Vue {}

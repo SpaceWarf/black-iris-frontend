@@ -7,7 +7,10 @@ import {
   faChevronDown,
   faEye,
   faEyeSlash,
-  faUser
+  faUser,
+  faEdit,
+  faCheck,
+  faBan
 } from '@fortawesome/free-solid-svg-icons';
 import App from './App.vue';
 import router from './router';
@@ -45,7 +48,10 @@ library.add(
   faChevronDown,
   faEye,
   faEyeSlash,
-  faUser
+  faUser,
+  faEdit,
+  faCheck,
+  faBan
 );
 
 createApp(App)

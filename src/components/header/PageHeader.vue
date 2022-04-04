@@ -4,25 +4,25 @@
     <div id="nav">
       <div>
         <router-link
-          v-for="header in getHeadersByRole(Role.User)"
+          v-for="header in getHeadersByAuthLevel(2)"
           :key="header.title"
           :to="header.link"
           >{{ header.title }}</router-link
         >
       </div>
-      <!-- <div v-if="isAdmin">
+      <div v-if="getHeadersByAuthLevel(1).length">
         <div class="header-separator"></div>
         <router-link
-          v-for="header in getHeadersByRole(Role.Admin)"
+          v-for="header in getHeadersByAuthLevel(1)"
           :key="header.title"
           :to="header.link"
           >{{ header.title }}</router-link
         >
-      </div> -->
-      <div v-if="isSuperAdmin">
+      </div>
+      <div v-if="getHeadersByAuthLevel(0).length">
         <div class="header-separator"></div>
         <router-link
-          v-for="header in getHeadersByRole(Role.SuperAdmin)"
+          v-for="header in getHeadersByAuthLevel(0)"
           :key="header.title"
           :to="header.link"
           >{{ header.title }}</router-link
@@ -53,20 +53,14 @@
 import { Options, Vue } from "vue-class-component";
 import { logOut } from "@/utils/firebase";
 import router from "@/router";
-import { mapGetters } from "vuex";
-import headers, { getHeadersByRole } from "./headers.config";
-import { Role } from "@/models/enums/Roles";
+import headers, { getHeadersByAuthLevel } from "./headers.config";
 
 @Options({
-  computed: {
-    ...mapGetters(["isAdmin", "isSuperAdmin"]),
-  },
   methods: {
-    getHeadersByRole,
-  }
+    getHeadersByAuthLevel,
+  },
 })
 export default class PageHeader extends Vue {
-  Role = Role;
   headers = headers;
 
   handleMyAccount(): void {

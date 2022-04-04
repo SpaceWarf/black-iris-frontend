@@ -7,29 +7,101 @@
     border-radius: 5px;
     font-size: 1.5rem;
     font-weight: bold;
-    cursor: pointer;
   }
 
   &:not(.secondary) {
-    button {
-      background-color: $primary;
-      color: $white;
+    &.disabled {
+      button {
+        background-color: $primary-light;
+        color: $white;
+        cursor: not-allowed;
+      }
+    }
 
-      &:hover {
-        background-color: $primary-dark;
+    &:not(.disabled) {
+      button {
+        background-color: $primary;
+        color: $white;
+        cursor: pointer;
+  
+        &:hover {
+          background-color: $primary-dark;
+        }
       }
     }
   }
 
   &.secondary {
-    button {
-      background-color: $white;
-      color: $primary;
-      border: 1px solid $primary;
+    &.disabled {
+      button {
+        background-color: $white;
+        color: $primary-light;
+        border: 1px solid $primary-light;
+        cursor: not-allowed;
+      }
+    }
 
-      &:hover {
-        background-color: $primary-light;
-        border: 2px solid $primary;
+
+    &:not(.disabled) {
+      button {
+        background-color: $white;
+        color: $primary;
+        border: 1px solid $primary;
+
+        &:hover {
+          background-color: $primary-light;
+          border: 1px solid $primary;
+        }
+      }
+    }
+  }
+}
+
+.icon-button-container {
+  button {
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    background-color: transparent;
+  }
+
+  &:not(.secondary) {
+    &.disabled {
+      button {
+        color: $primary-light;
+        cursor: not-allowed;
+      }
+    }
+
+    &:not(.disabled) {
+      button {
+        color: $primary;
+        cursor: pointer;
+
+        &:hover {
+          color: $primary-dark;
+        }
+      }
+    }
+  }
+
+  &.secondary {
+    &.disabled {
+      button {
+        color: $primary-light;
+        cursor: not-allowed;
+      }
+    }
+
+    &:not(.disabled) {
+      button {
+        color: $white;
+        cursor: pointer;
+  
+        &:hover {
+          color: $primary-light;
+        }
       }
     }
   }

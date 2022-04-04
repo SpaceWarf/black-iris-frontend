@@ -9,7 +9,7 @@
   </div>
   <div
     class="collapsable-content"
-    :class="{ collapsed: collapsed }"
+    :class="{ collapsed }"
   >
     <slot></slot>
   </div>

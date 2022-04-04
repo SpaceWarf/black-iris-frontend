@@ -1,13 +1,21 @@
 <template>
+  <PageHeader></PageHeader>
   <div class="content">
-    User Management
+    <UserManagementTable></UserManagementTable>
   </div>
 </template>
 
 <script lang="ts">
+import PageHeader from "@/components/header/PageHeader.vue";
+import UserManagementTable from "@/components/user-management/UserManagementTable.vue";
 import { Options, Vue } from "vue-class-component";
 
-@Options({})
+@Options({
+  components: {
+    PageHeader,
+    UserManagementTable
+  }
+})
 export default class UserManagementView extends Vue {}
 </script>
 
@@ -16,7 +24,7 @@ export default class UserManagementView extends Vue {}
 .content {
   display: flex;
   justify-content: center;
-  padding-top: 50px;
   height: 100%;
+  padding-top: 10px;
 }
 </style>

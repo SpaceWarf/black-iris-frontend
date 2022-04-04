@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import { fetchUserDetails, getUser } from '@/utils/firebase';
-import { getRoleAuthorityLevel, Role } from '@/models/enums/Roles';
 import store from '@/store';
 
 const routes: Array<RouteRecordRaw> = [
@@ -31,17 +30,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: 'Weapons Store',
       authRequired: true,
-      authLevel: Role.User
-    },
-  },
-  {
-    path: '/drugs',
-    name: 'Drugs Store',
-    component: () => import(/* webpackChunkName: "drugStore" */ '../views/DrugsStoreView.vue'),
-    meta: {
-      title: 'Drugs Store',
-      authRequired: true,
-      authLevel: Role.User
+      authLevel: 2
     },
   },
   {
@@ -51,7 +40,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: 'User Management',
       authRequired: true,
-      authLevel: Role.SuperAdmin
+      authLevel: 0
     },
   },
   {
@@ -73,10 +62,10 @@ router.beforeEach(async (to, from, next) => {
   document.title = (to.meta.title as string) || 'Not Found';
   if (to.matched.some(record => record.meta.authRequired)) {
     const user = await getUser();
-    if (user && user.email) {
-      await fetchUserDetails(user.email);
+    if (user && user.uid) {
+      await fetchUserDetails(user.uid);
 
-      if (getRoleAuthorityLevel(store.getters.getRole) <= getRoleAuthorityLevel(to.meta.authLevel as Role)) {
+      if (store.getters.getRole.authority <= (to.meta.authLevel as number)) {
         next();
       } else {
         next({ path: '/NotAuthorized' });

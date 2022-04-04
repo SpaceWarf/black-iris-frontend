@@ -1,19 +1,17 @@
-import { Role } from "@/models/enums/Roles";
-
 export interface Header {
   title: string;
   link: string;
-  auth: Role
+  authLevel: number
 }
 
-export const getHeadersByRole = (role: Role): Header[] => {
-  return headers.filter(header => header.auth === role);
+export const getHeadersByAuthLevel = (authLevel: number): Header[] => {
+  return headers.filter(header => header.authLevel === authLevel);
 }
 
 const headers: Header[] = [
-  { title: 'Weapons', link: 'weapons', auth: Role.User },
-  { title: 'Drugs', link: 'drugs', auth: Role.User },
-  { title: 'User Management', link: 'userManagement', auth: Role.SuperAdmin },
+  { title: 'Weapons', link: 'weapons', authLevel: 2 },
+  { title: 'Listing Management', link: 'listingManagement', authLevel: 1 },
+  { title: 'User Management', link: 'userManagement', authLevel: 0 },
 ];
 
 export default headers;

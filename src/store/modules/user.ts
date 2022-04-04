@@ -1,4 +1,5 @@
-import { getRoleAuthorityLevel, Role } from "@/models/enums/Roles";
+import firebase from "firebase";
+import Role from "@/models/interfaces/Role";
 import UserDetails from "@/models/interfaces/UserDetails";
 
 export interface UserState {
@@ -32,17 +33,14 @@ export default {
     getEmail: (state: UserState): string => {
       return state.user?.firebaseDetails?.email ?? '';
     },
-    getRole: (state: UserState): string => {
-      return state.user?.role ?? '';
-    },
-    isAdmin: (state: UserState): boolean => {
-      return getRoleAuthorityLevel(state.user.role) <= getRoleAuthorityLevel(Role.Admin);
-    },
-    isSuperAdmin: (state: UserState): boolean => {
-      return getRoleAuthorityLevel(state.user.role) <= getRoleAuthorityLevel(Role.SuperAdmin);
+    getRole: (state: UserState): Role => {
+      return state.user?.role ?? {};
     },
     areDetailsSet: (state: UserState): boolean => {
       return !!state.user.role && !!state.user.group;
+    },
+    getFirebaseDetails: (state: UserState): firebase.User => {
+      return state.user.firebaseDetails;
     }
   }
 };
